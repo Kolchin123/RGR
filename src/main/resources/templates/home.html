@@ -11,11 +11,13 @@
 		<div ng-controller="HomeCtrl">
 			
 			<div>
-				<h1 th:text="#{label.home.welcome}">Добро пожаловать QuizZz!</h1>
+				<h1 th:text="#{label.home.welcome}">Добро пожаловать!</h1>
 				<br/>
 			</div>
 
-			<table class="table table-hover table_sort" align="center">
+			<input class="form-control" type="text" placeholder="Поиск по любым параметрам" id="search-text" onkeyup="tableSearch()"/>
+
+			<table class="table table-hover table_sort" align="center" id="info-table">
 				<thead>
 					<tr>
 						<th th:text="#{label.home.maintable.headers.quiz}" width="70%">Тесты</th>
@@ -68,18 +70,17 @@
 
 			});
 			</script>
+
+			<script type="text/javascript" src="../js/sorting.js" th:src="@{/js/sorting.js}"></script>
 			
 			<div class="text-center">
 				<button th:text="#{label.home.maintable.loadmore}" class="btn btn-default" ng-click="loadNextPage()" ng-show="pagination.morePagesAvailable">Load more...</button>
 			</div>
-			
 		</div>
-
 	</div>
-	
+
 	<div th:replace="fragments/angular :: angular">...</div>
-	<script type="text/javascript" src="../js/homeApp.js"
-		        th:src="@{/js/homeApp.js}"></script>
+	<script type="text/javascript" src="../js/homeApp.js" th:src="@{/js/homeApp.js}"></script>
 		        
 </body>
 </html>
