@@ -12,7 +12,6 @@ public class QuizZzApplication {
 
 	//поиск
 	//админ доделать
-	//самый популярный
 
 	public static void main(String[] args) {
 		SpringApplication.run(QuizZzApplication.class, args);
