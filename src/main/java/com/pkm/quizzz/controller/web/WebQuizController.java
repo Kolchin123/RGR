@@ -79,20 +79,6 @@ public class WebQuizController {
         }
 	}
 
-	@RequestMapping(value = "/admin/userDelete", method = RequestMethod.POST)
-	public String userDelete(@RequestParam("idToDelete") String idToDelete) {
-		System.out.println("!!!"+Long.parseLong(idToDelete));
-		//productDAO.deleteById(Long.parseLong(idToDelete));
-		return "redirect:/admin";
-	}
-
-	@RequestMapping(value = "/admin/quizDelete", method = RequestMethod.POST)
-	public String quizDelete(@RequestParam("idToDelete") String idToDelete) {
-		System.out.println("!!!"+Long.parseLong(idToDelete));
-		//userRepo.deleteById(Long.parseLong(idToDelete));
-		return "redirect:/admin";
-	}
-
 	@RequestMapping(value = "/createQuiz", method = RequestMethod.GET)
 	@PreAuthorize("isAuthenticated()")
 	public String newQuiz(Map<String, Object> model, Model m) {
@@ -180,14 +166,20 @@ public class WebQuizController {
 			Quiz quiz = quizService.find(quiz_id);
 			mav.addObject("quiz", quiz);
 			mav.setViewName("playQuiz");
-
-			quiz.setPlayed(quiz.getPlayed()+1);
-			System.out.println("Устанавливаем число пройденных");
-
-			quizRepository.save(quiz);
-			System.out.println("Сохраняем");
-
-			System.out.println(quiz);
 			return mav;
+	}
+
+	@RequestMapping(value = "/admin/userDelete", method = RequestMethod.POST)
+	public String userDelete(@RequestParam("idToDelete") String idToDelete) {
+		System.out.println("!!!"+Long.parseLong(idToDelete));
+		//productDAO.deleteById(Long.parseLong(idToDelete));
+		return "redirect:/admin";
+	}
+
+	@RequestMapping(value = "/admin/quizDelete", method = RequestMethod.POST)
+	public String quizDelete(@RequestParam("idToDelete") String idToDelete) {
+		System.out.println("!!!"+Long.parseLong(idToDelete));
+		//userRepo.deleteById(Long.parseLong(idToDelete));
+		return "redirect:/admin";
 	}
 }

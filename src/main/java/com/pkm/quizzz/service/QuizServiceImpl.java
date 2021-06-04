@@ -130,19 +130,18 @@ public class QuizServiceImpl implements QuizService {
 				throw new InvalidParametersException("No answer found for question: " + question.getText());
 			}
 		}
-
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		User u = userRepository.findByUsername(username);
 
 		mailing.sendTestResult(u,results,quiz);
 		System.out.println("Отправляем письмо");
-/*
+
 		quiz.setPlayed(quiz.getPlayed()+1);
 		System.out.println("Устанавливаем число пройденных");
 
 		quizRepository.save(quiz);
-		System.out.println("Сохраняем");*/
+		System.out.println("Сохраняем");
 		return results;
 	}
 

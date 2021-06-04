@@ -35,13 +35,22 @@
 							<span th:text="${user.email}"> Email </span>
 						</td>
 						<td>
-
+							<form action="/admin/userTest" method="post">
+								<input type="hidden" name="idToDelete" th:value="${user.id}"/>
+								<button type="submit" class="btn btn-primary">Повысить права</button>
+							</form>
 						</td>
 						<td>
-
+							<form action="/admin/userAdm" method="post">
+								<input type="hidden" name="idToDelete" th:value="${user.id}"/>
+								<button type="submit" class="btn btn-primary">Повысить права</button>
+							</form>
 						</td>
 						<td>
-
+							<form action="/admin/userDelete" method="post">
+								<input type="hidden" name="idToDelete" th:value="${user.id}"/>
+								<button type="submit" class="btn btn-primary">Удалить</button>
+							</form>
 						</td>
 					</tr>
 				</tbody>
@@ -65,7 +74,10 @@
 						<span th:text="${test.description}"> Описание </span>
 					</td>
 					<td>
-
+						<form action="/admin/quizDelete" method="post">
+							<input type="hidden" name="idToDelete" th:value="${test.id}"/>
+							<button type="submit" class="btn btn-primary">Удалить</button>
+						</form>
 					</td>
 				</tr>
 				</tbody>
