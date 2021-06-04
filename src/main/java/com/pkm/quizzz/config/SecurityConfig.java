@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
+	//конфигурация глобальной безопасности проекта
 	@Autowired
 	DataSource dataSource;
 

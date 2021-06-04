@@ -31,6 +31,8 @@ import com.pkm.quizzz.service.usermanagement.UserManagementService;
 @RequestMapping(UserController.ROOT_MAPPING)
 public class UserController {
 
+	//обработка запросов-отсылка ответов относительно авторизации
+
 	public static final String ROOT_MAPPING = "/api/users";
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 

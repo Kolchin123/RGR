@@ -4,6 +4,8 @@ public class Response {
 	private Long question;
 	private Long selectedAnswer;
 
+	//сущность ответов для возврата в html
+
 	public Long getQuestion() {
 		return question;
 	}

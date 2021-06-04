@@ -10,6 +10,8 @@ import java.util.Set;
 
 @Entity
 public class Role implements GrantedAuthority {
+
+    //сущность роли
     @Id
     private Long id;
 

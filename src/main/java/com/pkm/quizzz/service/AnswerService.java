@@ -8,6 +8,7 @@ import com.pkm.quizzz.model.Answer;
 import com.pkm.quizzz.model.Question;
 
 public interface AnswerService {
+	//сервис ответов
 	Answer save(Answer answer) throws UnauthorizedActionException;
 
 	Answer find(Long id) throws ResourceUnavailableException;

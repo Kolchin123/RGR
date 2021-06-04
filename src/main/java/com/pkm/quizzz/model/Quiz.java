@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "quiz")
 public class Quiz extends BaseModel implements UserOwned {
 
+	//сущность теста
+
 	@OneToOne
 	@JsonIgnore
 	private User createdBy;

@@ -34,6 +34,8 @@ import com.pkm.quizzz.service.QuizService;
 @RequestMapping(QuizController.ROOT_MAPPING)
 public class QuizController {
 
+	//обработка запросов-отсылка ответов относительно тестов
+
 	public static final String ROOT_MAPPING = "/api/quizzes";
 	
 	private static final Logger logger = LoggerFactory.getLogger(QuizController.class);

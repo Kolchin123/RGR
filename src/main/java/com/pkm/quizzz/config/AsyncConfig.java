@@ -11,6 +11,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class AsyncConfig {
 
+	//для асинхронного доступа, пока бесполезен
 	@Bean
 	public Executor asyncExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

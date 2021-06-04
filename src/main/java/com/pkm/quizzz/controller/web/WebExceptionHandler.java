@@ -20,6 +20,8 @@ import com.pkm.quizzz.exceptions.UserAlreadyExistsException;
 @ControllerAdvice("com.pkm.quizzz.controller.web")
 public class WebExceptionHandler {
 
+	//контроллер отлова различных ошибок
+
 	@ExceptionHandler(UnauthorizedActionException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public ModelAndView unauthorizedAction(HttpServletRequest req, Exception ex) {

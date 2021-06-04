@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "question")
 public class Question extends BaseModel implements UserOwned {
 
+	//сущность вопроса теста
+
 	@Size(min = 2, max = 150, message = "The question should be between 2 and 150 characters")
 	@NotNull(message = "Question text not provided")
 	private String text;

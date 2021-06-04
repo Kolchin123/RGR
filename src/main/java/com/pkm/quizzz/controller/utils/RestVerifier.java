@@ -9,6 +9,8 @@ import com.pkm.quizzz.exceptions.ModelVerificationException;
 public class RestVerifier {
 	private static final Logger logger = LoggerFactory.getLogger(RestVerifier.class);
 
+	//отлов ошибок относительно рестфул реализации
+
 	public static void verifyModelResult(BindingResult result) throws ModelVerificationException {
 		if (result.hasErrors()) {
 			logger.error(result.toString());

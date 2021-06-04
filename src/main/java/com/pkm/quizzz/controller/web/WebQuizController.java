@@ -52,6 +52,8 @@ public class WebQuizController {
 	@Autowired
 	AccessControlService<Question> accessControlServiceQuestion;
 
+	//контроллер создания и прохождения тестов
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model m) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

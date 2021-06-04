@@ -8,5 +8,5 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @ComponentScan("com.pkm.quizzz.service")
 public class AopConfig {
- //
+ //включаем поддержку аннотации @Aspect, для поддержки сквозной функциональности
 }

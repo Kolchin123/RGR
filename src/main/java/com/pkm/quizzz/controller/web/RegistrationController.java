@@ -24,6 +24,8 @@ import com.pkm.quizzz.service.usermanagement.RegistrationService;
 @RequestMapping("/user")
 public class RegistrationController {
 
+	//контроллер регистрации
+
 	@Autowired
 	private RegistrationService registrationService;
 

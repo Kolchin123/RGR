@@ -14,6 +14,8 @@ import com.pkm.quizzz.service.usermanagement.token.TokenDeliverySystem;
 @Service
 public class RegistrationServiceMail implements RegistrationService {
 
+	//сервис почты
+
 	private UserService userService;
 	private TokenServiceRegistration tokenService;
 	private TokenDeliverySystem tokenDeliveryService;

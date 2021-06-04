@@ -8,6 +8,9 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BaseModel {
+
+	//базовая модель
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")

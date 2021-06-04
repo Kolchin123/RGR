@@ -20,6 +20,8 @@ import com.pkm.quizzz.exceptions.UserAlreadyExistsException;
 @ControllerAdvice("com.pkm.quizzz.controller.rest.v1")
 public class RestExceptionHandler {
 
+	//Обработчик ошибок
+
 	@ExceptionHandler(UnauthorizedActionException.class)
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	@ResponseBody

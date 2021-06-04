@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "user")
 public class User extends BaseModel implements UserOwned, Serializable {
 
+	//сущность пользователя
+
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "email")

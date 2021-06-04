@@ -19,6 +19,8 @@ import com.pkm.quizzz.service.usermanagement.UserManagementService;
 @RequestMapping("/user")
 public class UserManagementController {
 
+	//контроллер пользователя
+
 	@Autowired
 	private UserManagementService userManagementService;
 

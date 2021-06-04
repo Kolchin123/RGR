@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @MappedSuperclass
 public abstract class TokenModel extends BaseModel {
 
+	//модель токена
+
 	@NotNull
 	String token;
 

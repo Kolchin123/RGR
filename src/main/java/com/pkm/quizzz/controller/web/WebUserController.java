@@ -16,6 +16,8 @@ public class WebUserController {
 	@Autowired
 	UserService userService;
 
+	//контроллер тестов создателя
+
 	@RequestMapping(value = "/{user_id}/quizzes", method = RequestMethod.GET)
 	@PreAuthorize("permitAll")
 	public String getQuizzesForUser(@PathVariable Long user_id) {

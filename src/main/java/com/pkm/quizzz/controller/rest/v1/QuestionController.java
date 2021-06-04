@@ -28,6 +28,8 @@ import com.pkm.quizzz.service.QuizService;
 @RequestMapping(QuestionController.ROOT_MAPPING)
 public class QuestionController {
 
+	//обработка запросов-отсылка ответов относительно вопросов на тесты
+
 	public static final String ROOT_MAPPING = "/api/questions";
 
 	@Autowired

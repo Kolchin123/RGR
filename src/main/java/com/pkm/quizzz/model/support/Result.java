@@ -4,6 +4,8 @@ public class Result {
 	private int totalQuestions = 0;
 	private int correctQuestions = 0;
 
+	//сущность результатов теста
+
 	public int getTotalQuestions() {
 		return totalQuestions;
 	}

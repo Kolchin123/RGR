@@ -7,6 +7,8 @@ import com.pkm.quizzz.service.UserService;
 
 public class RegistrationServiceSimple implements RegistrationService {
 
+	//сервис регистрации
+
 	@Autowired
 	private UserService userService;
 

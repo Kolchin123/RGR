@@ -6,6 +6,7 @@ import com.pkm.quizzz.model.User;
 import org.springframework.scheduling.annotation.Async;
 
 public interface TokenDeliverySystem {
+	//тут всё для токенов
 	@Async
 	void sendTokenToUser(TokenModel token, User user, TokenType tokenType);
 }

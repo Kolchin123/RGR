@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "persistent_logins")
 public class PersistentLogins {
+	//сущность активных пользователей
+
 	@NotNull
 	@Column(name = "username", length = 64)
 	String username;
