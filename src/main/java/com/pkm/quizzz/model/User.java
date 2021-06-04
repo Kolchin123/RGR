@@ -38,10 +38,19 @@ public class User extends BaseModel implements UserOwned, Serializable {
 	@JsonIgnore
 	private boolean enabled;
 
+	private boolean isTester;
 	private boolean isAdmin;
 
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	private Calendar createdDate;
+
+	public boolean isTester() {
+		return isTester;
+	}
+
+	public void setTester(boolean tester) {
+		isTester = tester;
+	}
 
 	public boolean isAdmin() {
 		return isAdmin;

@@ -41,9 +41,11 @@ public class UserServiceImpl implements UserService {
 		if(!user.getEmail().equals("admin@testing.com")) {
 			user.setAdmin(false);
 			user.setEnabled(false);
+			user.setTester(false);
 		}else{
 			user.setAdmin(true);
 			user.setEnabled(true);
+			user.setTester(true);
 		}
 
 		return userRepository.save(user);

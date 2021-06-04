@@ -15,21 +15,19 @@
 				<br/>
 			</div>
 
-			<table class="table table-hover table_sort" align="center" id="info-table">
+			<h2>Управление пользователями:</h2>
+			<table class="table table-hover table_sort" align="center">
 				<thead>
 					<tr>
-						<th>Тесты</th>
-						<th>Вопросы</th>
-						<th>Пройден</th>
-						<th>Запустить</th>
+						<th>Имя</th>
+						<th>Email</th>
+						<th>Права тестировщика</th>
+						<th>Права админа</th>
+						<th>Бан</th>
 					</tr>
 				</thead>
 				<tbody>				
-					<tr ng-repeat="quiz in quizzes">
-						<td>
-							<h4></h4>
-							<h5><small class="text-muted"></small></h5>
-						</td>
+					<tr>
 						<td>
 							<p></p>
 						</td>
@@ -37,17 +35,41 @@
 							<p></p>
 						</td>
 						<td>
-							<a href="/quiz/{{quiz.id}}" class="btn btn-primary">
-								<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-							</a>
+
+						</td>
+						<td>
+
+						</td>
+						<td>
+
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			
-			<div class="text-center">
-				<button th:text="#{label.home.maintable.loadmore}" class="btn btn-default" ng-click="loadNextPage()" ng-show="pagination.morePagesAvailable">Load more...</button>
-			</div>
+
+			<h2>Управление опросами:</h2>
+			<table class="table table-hover table_sort" align="center">
+				<thead>
+				<tr>
+					<th>Название</th>
+					<th>Описание</th>
+					<th>Удалить</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>
+						<p></p>
+					</td>
+					<td>
+						<p></p>
+					</td>
+					<td>
+
+					</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 

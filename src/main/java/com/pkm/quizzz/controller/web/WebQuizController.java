@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,8 +52,10 @@ public class WebQuizController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		User u = userRepository.findByUsername(username);
-		if(u != null)
-			m.addAttribute("auth",u.isAdmin());
+		if(u != null) {
+			m.addAttribute("test", u.isTester());
+			m.addAttribute("auth", u.isAdmin());
+		}
 		return "home";
 	}
 
@@ -69,27 +72,37 @@ public class WebQuizController {
 	@RequestMapping(value = "/createQuiz", method = RequestMethod.GET)
 	@PreAuthorize("isAuthenticated()")
 	public String newQuiz(Map<String, Object> model, Model m) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		User u = userRepository.findByUsername(username);
-		m.addAttribute("auth",u.isAdmin());
-		return "createQuiz";
+		Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication1.getName().equals("anonymousUser")) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String username = authentication.getName();
+			User u = userRepository.findByUsername(username);
+			m.addAttribute("auth",u.isAdmin());
+			return "createQuiz";
+		}else{
+			return "redirect:/user/login";
+		}
 	}
 
 	@RequestMapping(value = "/createQuiz", method = RequestMethod.POST)
 	@PreAuthorize("isAuthenticated()")
 	public String newQuiz(@AuthenticationPrincipal AuthenticatedUser user, @Valid Quiz quiz, BindingResult result,
 			Map<String, Object> model) {
-		Quiz newQuiz;
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if(!authentication.getName().equals("anonymousUser")) {
+			Quiz newQuiz;
 
-		try {
-			RestVerifier.verifyModelResult(result);
-			newQuiz = quizService.save(quiz, user.getUser());
-		} catch (ModelVerificationException e) {
-			return "createQuiz";
+			try {
+				RestVerifier.verifyModelResult(result);
+				newQuiz = quizService.save(quiz, user.getUser());
+			} catch (ModelVerificationException e) {
+				return "createQuiz";
+			}
+
+			return "redirect:/editQuiz/" + newQuiz.getId();
+		}else{
+			return "redirect:/user/login";
 		}
-
-		return "redirect:/editQuiz/" + newQuiz.getId();
 	}
 
 	@RequestMapping(value = "/editQuiz/{quiz_id}", method = RequestMethod.GET)
@@ -121,24 +134,36 @@ public class WebQuizController {
 	@RequestMapping(value = "/quiz/{quiz_id}", method = RequestMethod.GET)
 	@PreAuthorize("permitAll")
 	public ModelAndView getQuiz(@PathVariable long quiz_id) {
-		Quiz quiz = quizService.find(quiz_id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getName().equals("anonymousUser")) {
+			Quiz quiz = quizService.find(quiz_id);
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("quiz", quiz);
-		mav.setViewName("quizView");
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("quiz", quiz);
+			mav.setViewName("quizView");
 
-		return mav;
+			return mav;
+		}else{
+			ModelAndView modelView =  new ModelAndView("redirect:/user/login");
+			return modelView;
+		}
 	}
 
 	@RequestMapping(value = "/quiz/{quiz_id}/play", method = RequestMethod.GET)
 	@PreAuthorize("permitAll")
 	public ModelAndView playQuiz(@PathVariable long quiz_id) {
-		Quiz quiz = quizService.find(quiz_id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getName().equals("anonymousUser")) {
+			Quiz quiz = quizService.find(quiz_id);
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("quiz", quiz);
-		mav.setViewName("playQuiz");
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("quiz", quiz);
+			mav.setViewName("playQuiz");
 
-		return mav;
+			return mav;
+		}else{
+			ModelAndView modelView =  new ModelAndView("redirect:/user/login");
+			return modelView;
+		}
 	}
 }
