@@ -15,10 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pkm.quizzz.controller.utils.RestVerifier;
@@ -80,6 +77,20 @@ public class WebQuizController {
         }else {
             return "redirect:/user/login";
         }
+	}
+
+	@RequestMapping(value = "/admin/userDelete", method = RequestMethod.POST)
+	public String userDelete(@RequestParam("idToDelete") String idToDelete) {
+		System.out.println("!!!"+Long.parseLong(idToDelete));
+		//productDAO.deleteById(Long.parseLong(idToDelete));
+		return "redirect:/admin";
+	}
+
+	@RequestMapping(value = "/admin/quizDelete", method = RequestMethod.POST)
+	public String quizDelete(@RequestParam("idToDelete") String idToDelete) {
+		System.out.println("!!!"+Long.parseLong(idToDelete));
+		//userRepo.deleteById(Long.parseLong(idToDelete));
+		return "redirect:/admin";
 	}
 
 	@RequestMapping(value = "/createQuiz", method = RequestMethod.GET)
@@ -165,12 +176,18 @@ public class WebQuizController {
 	@RequestMapping(value = "/quiz/{quiz_id}/play", method = RequestMethod.GET)
 	@PreAuthorize("permitAll")
 	public ModelAndView playQuiz(@PathVariable long quiz_id) {
-        ModelAndView mav = new ModelAndView();
+        	ModelAndView mav = new ModelAndView();
 			Quiz quiz = quizService.find(quiz_id);
-
 			mav.addObject("quiz", quiz);
 			mav.setViewName("playQuiz");
 
+			quiz.setPlayed(quiz.getPlayed()+1);
+			System.out.println("Устанавливаем число пройденных");
+
+			quizRepository.save(quiz);
+			System.out.println("Сохраняем");
+
+			System.out.println(quiz);
 			return mav;
 	}
 }

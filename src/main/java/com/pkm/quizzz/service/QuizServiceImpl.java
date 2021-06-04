@@ -134,13 +134,15 @@ public class QuizServiceImpl implements QuizService {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String username = authentication.getName();
 		User u = userRepository.findByUsername(username);
-		//System.out.println(principal.getName());
+
 		mailing.sendTestResult(u,results,quiz);
-		Quiz currentQuiz = quiz;
-		int newValue = currentQuiz.getPlayed();
-		newValue++;
-		currentQuiz.setPlayed(newValue);
-		quizRepository.save(currentQuiz);
+		System.out.println("Отправляем письмо");
+/*
+		quiz.setPlayed(quiz.getPlayed()+1);
+		System.out.println("Устанавливаем число пройденных");
+
+		quizRepository.save(quiz);
+		System.out.println("Сохраняем");*/
 		return results;
 	}
 
