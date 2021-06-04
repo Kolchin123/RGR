@@ -43,6 +43,14 @@ public class Quiz extends BaseModel implements UserOwned {
 	private int played;
 	private int questionCount;
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public int getPlayed() {
 		return played;
 	}

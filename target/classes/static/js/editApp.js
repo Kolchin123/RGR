@@ -44,7 +44,7 @@
 			if ($scope.quizId != 0)
 				url = url + $scope.quizId + "/";
 
-			$http.post(url + "?name=" + $scope.quiz.name + "&description=" + $scope.quiz.description)
+			$http.post(url + "?name=" + $scope.quiz.name + "&description=" + $scope.quiz.description+ "&category=" + $scope.quiz.category)
 			.then(
 					function(response) {
 						console.log(response.data);

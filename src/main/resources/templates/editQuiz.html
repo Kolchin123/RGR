@@ -23,6 +23,9 @@
 						<label th:text="#{label.newquiz.title}">Title</label>
 				        <input th:placeholder="#{label.newquiz.title.placeholder}" name="name" class="form-control-c" required="true" autofocus="true"  ng-model="quiz.name"/>
 				        <br/>
+						<label th:text="#{label.newquiz.category}">Category</label>
+						<input th:placeholder="#{label.newquiz.category.placeholder}" name="category" class="form-control-c" required="true" autofocus="true" ng-model="quiz.category" />
+						<br/>
 				        <label th:text="#{label.newquiz.description}">Description</label>
 				        <textarea th:placeholder="#{label.newquiz.description.placeholder}" name="description" class="form-control-c" rows="3" ng-model="quiz.description" > </textarea>
 			        </div>
@@ -88,8 +91,7 @@
 						<button th:text="#{label.editquiz.submit.saveAll}" class="btn btn-primary" type="submit" ng-click="saveAll()" ng-disabled="isQuizSaving">Update</button>
 						<button th:text="#{label.editquiz.submit.publish}" class="btn btn-primary" type="submit" ng-hide="quiz.isPublished" ng-click="publish()" ng-disabled="isPublishing">Publish</button>
 			        </div>
-				</form>  
-				<!-- Remove this when footer is added -->
+				</form>
 				<br/><br/><br/><br/><br/><br/><br/><br/>
 			</div>
 			 

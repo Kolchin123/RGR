@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "com.pkm.quizzz")
 public class QuizZzApplication {
 
-	//категории
 	//поиск
 	//админ доделать
 	//мыло о результате
