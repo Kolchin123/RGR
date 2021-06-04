@@ -1,5 +1,6 @@
 package com.pkm.quizzz.service;
 
+import com.pkm.quizzz.model.Quiz;
 import com.pkm.quizzz.model.User;
 import com.pkm.quizzz.model.support.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class MailService {
         this.emailSender.send(message);
     }
 
-    public void sendTestResult(User u, Result R) {
-        send(u.getEmail(), "QuizZz: результаты теста", "Здравствуйте! результаты теста " + R.getCorrectQuestions() + "/" + R.getTotalQuestions());
+    public void sendTestResult(User u, Result R, Quiz quiz) {
+        send(u.getEmail(), "QuizZz: результаты теста "+quiz.getName(), "Здравствуйте! результаты теста " + R.getCorrectQuestions() + "/" + R.getTotalQuestions());
     }
 }

@@ -12,7 +12,6 @@ public class QuizZzApplication {
 
 	//поиск
 	//админ доделать
-	//мыло о результате
 	//самый популярный
 
 	public static void main(String[] args) {

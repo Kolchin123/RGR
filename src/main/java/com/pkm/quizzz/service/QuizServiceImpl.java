@@ -11,11 +11,14 @@ import com.pkm.quizzz.model.User;
 import com.pkm.quizzz.model.support.Response;
 import com.pkm.quizzz.model.support.Result;
 import com.pkm.quizzz.repository.QuizRepository;
+import com.pkm.quizzz.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +33,8 @@ public class QuizServiceImpl implements QuizService {
 
 	private QuestionService questionService;
 
+	@Autowired
+	private UserRepository userRepository;
 	@Autowired
 	private MailService mailing;
 
@@ -126,8 +131,11 @@ public class QuizServiceImpl implements QuizService {
 			}
 		}
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User u = userRepository.findByUsername(username);
 		//System.out.println(principal.getName());
-		//mailing.sendTestResult(results);
+		mailing.sendTestResult(u,results,quiz);
 		Quiz currentQuiz = quiz;
 		int newValue = currentQuiz.getPlayed();
 		newValue++;
