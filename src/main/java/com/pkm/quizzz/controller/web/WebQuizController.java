@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.pkm.quizzz.model.User;
+import com.pkm.quizzz.repository.QuizRepository;
 import com.pkm.quizzz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,7 +36,10 @@ public class WebQuizController {
 	@Autowired
 	UserRepository userRepository;
 
-	@Autowired
+    @Autowired
+    QuizRepository quizRepository;
+
+    @Autowired
 	QuizService quizService;
 
 	@Autowired
@@ -61,12 +65,21 @@ public class WebQuizController {
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
 	public String admin(Model m) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		User u = userRepository.findByUsername(username);
-		if(u != null)
-			m.addAttribute("auth",u.isAdmin());
-		return "admin";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User u = userRepository.findByUsername(username);
+        if (u != null) {
+            m.addAttribute("auth", u.isAdmin());
+            if(u.isAdmin()){
+                m.addAttribute("users", userRepository.findAll());
+                m.addAttribute("tests", quizRepository.findAll());
+                return "admin";
+            }else {
+                return "redirect:/user/login";
+            }
+        }else {
+            return "redirect:/user/login";
+        }
 	}
 
 	@RequestMapping(value = "/createQuiz", method = RequestMethod.GET)
@@ -152,18 +165,12 @@ public class WebQuizController {
 	@RequestMapping(value = "/quiz/{quiz_id}/play", method = RequestMethod.GET)
 	@PreAuthorize("permitAll")
 	public ModelAndView playQuiz(@PathVariable long quiz_id) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(!authentication.getName().equals("anonymousUser")) {
+        ModelAndView mav = new ModelAndView();
 			Quiz quiz = quizService.find(quiz_id);
 
-			ModelAndView mav = new ModelAndView();
 			mav.addObject("quiz", quiz);
 			mav.setViewName("playQuiz");
 
 			return mav;
-		}else{
-			ModelAndView modelView =  new ModelAndView("redirect:/user/login");
-			return modelView;
-		}
 	}
 }

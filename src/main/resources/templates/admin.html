@@ -27,12 +27,12 @@
 					</tr>
 				</thead>
 				<tbody>				
-					<tr>
+					<tr th:each="user : ${users}">
 						<td>
-							<p></p>
+							<span th:text="${user.username}"> Имя </span>
 						</td>
 						<td>
-							<p></p>
+							<span th:text="${user.email}"> Email </span>
 						</td>
 						<td>
 
@@ -57,12 +57,12 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
+				<tr th:each="test : ${tests}">
 					<td>
-						<p></p>
+						<span th:text="${test.name}"> Название </span>
 					</td>
 					<td>
-						<p></p>
+						<span th:text="${test.description}"> Описание </span>
 					</td>
 					<td>
 
