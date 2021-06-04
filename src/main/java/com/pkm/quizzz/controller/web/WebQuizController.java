@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.pkm.quizzz.model.User;
 import com.pkm.quizzz.repository.QuizRepository;
 import com.pkm.quizzz.repository.UserRepository;
+import com.pkm.quizzz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -32,6 +33,9 @@ public class WebQuizController {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	UserService userService;
 
     @Autowired
     QuizRepository quizRepository;
@@ -169,17 +173,35 @@ public class WebQuizController {
 			return mav;
 	}
 
+	@RequestMapping(value = "/admin/userTest", method = RequestMethod.POST)
+	public String userTest(@RequestParam("idToDelete") String idToDelete) {
+		System.out.println("!!!"+Long.parseLong(idToDelete));
+		User u = userService.find(Long.parseLong(idToDelete));
+		u.setTester(true);
+		userRepository.save(u);
+		return "redirect:/admin";
+	}
+
+	@RequestMapping(value = "/admin/userAdm", method = RequestMethod.POST)
+	public String userAdm(@RequestParam("idToDelete") String idToDelete) {
+		System.out.println("!!!"+Long.parseLong(idToDelete));
+		User u = userService.find(Long.parseLong(idToDelete));
+		u.setAdmin(true);
+		userRepository.save(u);
+		return "redirect:/admin";
+	}
+
 	@RequestMapping(value = "/admin/userDelete", method = RequestMethod.POST)
 	public String userDelete(@RequestParam("idToDelete") String idToDelete) {
 		System.out.println("!!!"+Long.parseLong(idToDelete));
-		//productDAO.deleteById(Long.parseLong(idToDelete));
+		userRepository.delete(Long.parseLong(idToDelete));
 		return "redirect:/admin";
 	}
 
 	@RequestMapping(value = "/admin/quizDelete", method = RequestMethod.POST)
 	public String quizDelete(@RequestParam("idToDelete") String idToDelete) {
 		System.out.println("!!!"+Long.parseLong(idToDelete));
-		//userRepo.deleteById(Long.parseLong(idToDelete));
+		quizRepository.delete(Long.parseLong(idToDelete));
 		return "redirect:/admin";
 	}
 }
