@@ -4,10 +4,15 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.pkm.quizzz.model.User;
+import com.pkm.quizzz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +32,9 @@ import com.pkm.quizzz.service.accesscontrol.AccessControlService;
 public class WebQuizController {
 
 	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
 	QuizService quizService;
 
 	@Autowired
@@ -39,13 +47,32 @@ public class WebQuizController {
 	AccessControlService<Question> accessControlServiceQuestion;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String home(Model m) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User u = userRepository.findByUsername(username);
+		if(u != null)
+			m.addAttribute("auth",u.isAdmin());
 		return "home";
+	}
+
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String admin(Model m) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User u = userRepository.findByUsername(username);
+		if(u != null)
+			m.addAttribute("auth",u.isAdmin());
+		return "admin";
 	}
 
 	@RequestMapping(value = "/createQuiz", method = RequestMethod.GET)
 	@PreAuthorize("isAuthenticated()")
-	public String newQuiz(Map<String, Object> model) {
+	public String newQuiz(Map<String, Object> model, Model m) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		User u = userRepository.findByUsername(username);
+		m.addAttribute("auth",u.isAdmin());
 		return "createQuiz";
 	}
 

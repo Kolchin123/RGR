@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:replace="fragments/head :: headerFragment">
+</head>
+<body ng-app="homeApp">
+
+	<div th:replace="fragments/header :: header">...</div>
+
+	<div class="container">
+
+		<div ng-controller="HomeCtrl">
+			
+			<div>
+				<h1 th:text="#{label.home.welcome}">Добро пожаловать в панель администратора!</h1>
+				<br/>
+			</div>
+
+			<table class="table table-hover table_sort" align="center" id="info-table">
+				<thead>
+					<tr>
+						<th>Тесты</th>
+						<th>Вопросы</th>
+						<th>Пройден</th>
+						<th>Запустить</th>
+					</tr>
+				</thead>
+				<tbody>				
+					<tr ng-repeat="quiz in quizzes">
+						<td>
+							<h4></h4>
+							<h5><small class="text-muted"></small></h5>
+						</td>
+						<td>
+							<p></p>
+						</td>
+						<td>
+							<p></p>
+						</td>
+						<td>
+							<a href="/quiz/{{quiz.id}}" class="btn btn-primary">
+								<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="text-center">
+				<button th:text="#{label.home.maintable.loadmore}" class="btn btn-default" ng-click="loadNextPage()" ng-show="pagination.morePagesAvailable">Load more...</button>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/angular :: angular">...</div>
+	<script type="text/javascript" src="../js/homeApp.js" th:src="@{/js/homeApp.js}"></script>
+		        
+</body>
+</html>

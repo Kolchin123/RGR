@@ -9,10 +9,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @ComponentScan(basePackages = "com.pkm.quizzz")
 public class QuizZzApplication {
-
-	//поиск
-	//админ доделать
-
 	public static void main(String[] args) {
 		SpringApplication.run(QuizZzApplication.class, args);
 	}
