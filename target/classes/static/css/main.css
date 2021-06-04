@@ -1,0 +1,44 @@
+.navbar-inverse-custom{
+    background-color: #94a7dc;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-custom{
+    color: white !important;
+    font-size: x-large;
+}
+
+ul.dropdown-menu{
+background: #94a7dc !important;
+}
+
+input.form-control-c {
+    display: block;
+    width: 100%;
+    height: 60px;
+    padding: 10px 12px;
+    font-size: 30px;
+    line-height: 1.42857143;
+    color: #000;
+    background-color: #fff;
+    background-image: none;
+    border: 4px solid #ccc;
+    border-radius: 21px;
+}
+
+textarea.form-control-c {
+    display: block;
+    width: 100%;
+    height: 60px;
+    padding: 10px 12px;
+    font-size: 30px;
+    line-height: 1.42857143;
+    color: #000;
+    background-color: #fff;
+    background-image: none;
+    border: 4px solid #ccc;
+    border-radius: 21px;
+}

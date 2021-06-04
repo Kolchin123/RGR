@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+	<div th:fragment="header">
+		<nav class="navbar navbar-inverse navbar-inverse-custom">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand navbar-custom" style="font-size: xx-large;" href="#">QuizZz</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-nav-custom navbar-custom">
+						<li><a class="navbar-custom" href="/">Главная</a></li>
+						<li sec:authorize="isAuthenticated()"><a class="navbar-custom" th:href="|/user/quizzes|">Мои тесты</a></li>
+						<li><a class="navbar-custom" href="/createQuiz">Создать тест</a></li>
+					</ul>
+
+
+					<div sec:authorize="!isAuthenticated()">
+						<ul class="nav navbar-nav navbar-right navbar-custom">
+				         	<li><a class="navbar-custom" href="/user/login">Вход</a></li>
+							<li><a class="navbar-custom" href="/user/registration">Регистрация</a></li>
+				        </ul>
+					</div>
+
+					<div sec:authorize="isAuthenticated()">
+						<ul class="nav navbar-nav navbar-right" style="background: #94a7dc !important;">
+							<li class="dropdown">
+					          	<a href="#" sec:authentication="name" class="dropdown-toggle navbar-custom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-triangle-bottom"></span></a>
+					          	<ul class="dropdown-menu">
+					          		<li><a class="navbar-custom" th:href="|/user/quizzes|">Мои тесты</a></li>
+					          		<li role="separator" class="divider"></li>
+					          		<li><a class="navbar-custom" href="/logout">Выход</a></li>
+					          	</ul>
+				          	</li>
+			          	</ul>
+					</div>
+					
+				</div>
+			</div>
+		</nav>
+	</div>
+
+</body>
+</html>
